@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Prime.Infrastructure;
 
 namespace Prime.Models
 {
@@ -16,6 +18,7 @@ namespace Prime.Models
     }
 
     [Table("Enrollee")]
+    [ModelBinder(BinderType = typeof(EnrolleeModelBinder))]
     public class Enrollee : BaseAuditable, IValidatableObject
     {
         [Key]
