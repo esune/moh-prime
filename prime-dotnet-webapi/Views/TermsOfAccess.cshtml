@@ -5,16 +5,32 @@
   var userClauseClause = Model.UserClause.Clause;
   var limitsAndConditions = Model.LimitsConditionsClause?.Clause;
   @* var licenceClassClauses = Model.LicenseClassClauses.Select(lcc => lcc.Clause); *@
+  var lcStartIndex = (Model.UserClause.EnrolleeClassification == "RU") ? 14 : 11;
 }
 
 @Html.Raw(userClauseClause)
 
 @if(!string.IsNullOrEmpty(limitsAndConditions))
 {
-  <li>
+  @if(Model.UserClause.EnrolleeClassification == "RU")
+  {
+    <ol start="14">
+      <li>
+        <p class="bold underline">Additional Clauses that Apply to You</p>
+        <p>@Html.Raw(limitsAndConditions)</p>
+      </li>
+    </ol>
+  }
+  else
+  {
     <p class="bold underline">Additional Clauses that Apply to You</p>
-    <p>@Html.Raw(limitsAndConditions)</p>
-  </li>
+
+    <ol start="11">
+      <li>
+        @Html.Raw(limitsAndConditions)
+      </li>
+    </ol>
+  }
 }
 
 @* @if(licenceClassClauses.Any())
